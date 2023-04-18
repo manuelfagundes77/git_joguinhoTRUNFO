@@ -14,7 +14,7 @@ public class baralho {
 
    public baralho() {
 
-      baralho = new ArrayList<pokemon>();
+      this.baralho = new ArrayList<pokemon>();
 
       
       baralho.add(new pokemon("Pikachu", 5, 4, 7));
@@ -32,6 +32,7 @@ public class baralho {
 
    public ArrayList<pokemon> getBaralho() {
       return baralho;
+      
    }
 
    
@@ -123,10 +124,27 @@ public class baralho {
 
       pcBaralho.addAll(baralho.getBaralho());
    }
+
+   public int getValorAtributo(String atributo, pokemon carta) {
+      if (atributo.equals("ataque")) {
+          return carta.getAtaque();
+      } else if (atributo.equals("defesa")) {
+          return carta.getDefesa();
+      } else if(atributo.equals("magia")) {
+         return carta.getMagia();
+     } else {
+      // caso o atributo seja inválido, retorna -1
+      return -1;
+  }
+  }
+
       
    public void realizarJogada(String atributo, pokemon jogadorCarta, pokemon pcCarta, int contadorDeEmpate, ArrayList<pokemon> baralhoDeEmpate) {
-      if (atributo.equals("ataque")) {
-         if (jogadorCarta.getAtaque() > pcCarta.getAtaque()) {
+      int valorAtributoJogador = getValorAtributo(atributo, jogadorCarta);
+      int valorAtributoPC = getValorAtributo(atributo, pcCarta);
+
+      
+         if (valorAtributoJogador > valorAtributoPC) {
             System.out.println("Parabens!!!, você ganhou.");
             System.out.printf("Seu ataque era: %d, e o do seu oponente era: %d, carta %s \n",
                   jogadorCarta.getAtaque(), pcCarta.getAtaque(), pcCarta.getNome());
@@ -156,7 +174,7 @@ public class baralho {
                System.out.println("*************************************");
 
             }
-         } else if (jogadorCarta.getAtaque() < pcCarta.getAtaque()) {
+         } else if (valorAtributoJogador < valorAtributoPC) {
             System.out.println("Você Perdeu, seu ataque é menor do que a do seu oponente.");
             System.out.printf("Seu ataque era: %d, e o do seu oponente era: %d, carta %s \n",
                   jogadorCarta.getAtaque(), pcCarta.getAtaque(), pcCarta.getNome());
@@ -185,7 +203,7 @@ public class baralho {
                System.out.println("todas as  cartas do pc");
 
             }
-         } else if (jogadorCarta.getAtaque() == pcCarta.getAtaque()) {
+         } else if (valorAtributoJogador == valorAtributoPC) {
             System.out.println("Você EMPATOU, seu ataque é igual ao do  seu oponente.");
             System.out.printf("Seu ataque era: %d, e o do seu oponente era: %d, carta %s \n",
                   jogadorCarta.getAtaque(), pcCarta.getAtaque(), pcCarta.getNome());
@@ -200,158 +218,9 @@ public class baralho {
             }
             System.out.println("cartas adicionada ao bolo de empate foram: " + baralhoDeEmpate.size());
          }
-      }
+      
 
-      if (atributo.equals("defesa")) {
-         if (jogadorCarta.getDefesa() > pcCarta.getDefesa()) {
-            System.out.println("Parabens!!!, você ganhou.");
-            System.out.printf("Sua Defera era: %d, e a do seu oponente era: %d, carta %s \n",
-                  jogadorCarta.getDefesa(), pcCarta.getDefesa(), pcCarta.getNome());
-            jogadorBaralho.add(pcCarta);
-            pcBaralho.remove(pcCarta);
-            jogadorBaralho.remove(jogadorCarta);
-            jogadorBaralho.add(jogadorCarta);
-
-            // if caso na ultima rodada tenha acontecido empate
-            // ESSE IF ESTA DENTRO DO PRIMEIRO IF
-            if (!baralhoDeEmpate.isEmpty()) {
-               System.out.println("cartas que voce ganhou");
-               for (int in = 0; in < baralhoDeEmpate.size(); in++) {
-                  jogadorBaralho.add(baralhoDeEmpate.get(in));
-                  // System.out.println(baralhoDeEmpate.get(in));
-               }
-               contadorDeEmpate = 0;
-               System.out.println("voce ganhou todas as cartas do empate. qunatidade de cartas obitidas :"
-                     + baralhoDeEmpate.size());
-               baralhoDeEmpate.clear();
-               System.out.println("TESTE numero de cartas no empate baralho" + baralhoDeEmpate.size());
-               System.out.println("todas minhas cartas");
-               for (int in = 0; in < jogadorBaralho.size(); in++) {
-
-                  System.out.println(jogadorBaralho.get(in));
-               }
-               System.out.println("*************************************");
-
-            }
-
-         } else if (jogadorCarta.getDefesa() < pcCarta.getDefesa()) {
-            System.out.println("Você Perdeu, sua defesa é menor do que a do seu oponente.");
-            System.out.printf("Sua Defera era: %d, e a do seu oponente era: %d, carta %s \n",
-                  jogadorCarta.getDefesa(), pcCarta.getDefesa(), pcCarta.getNome());
-            pcBaralho.add(jogadorCarta);
-            jogadorBaralho.remove(jogadorCarta);
-            pcBaralho.remove(pcCarta);
-            pcBaralho.add(pcCarta);
-
-            if (!baralhoDeEmpate.isEmpty()) {
-               System.out.println("cartas que O PC Ganhou");
-               for (int in = 0; in < baralhoDeEmpate.size(); in++) {
-                  pcBaralho.add(baralhoDeEmpate.get(in));
-                  System.out.println(baralhoDeEmpate.get(in));
-               }
-               contadorDeEmpate = 0;
-               System.out.println("O PC ganhou todas as cartas do empate. qunatidade de cartas obitidas :"
-                     + baralhoDeEmpate.size());
-               baralhoDeEmpate.clear();
-               System.out.println("TESTE numero de cartas no empate baralho" + baralhoDeEmpate.size());
-               System.out.println("todas minhas cartas");
-               for (int in = 0; in < pcBaralho.size(); in++) {
-
-                  System.out.println(pcBaralho.get(in));
-               }
-               System.out.println("todas as  cartas do pc");
-            }
-         } else if (jogadorCarta.getDefesa() == pcCarta.getDefesa()) {
-            System.out.println("Você EMPATOU, seu ataque é igual ao do  seu oponente.");
-            System.out.printf("Seu ataque era: %d, e o do seu oponente era: %d, carta %s \n",
-                  jogadorCarta.getAtaque(), pcCarta.getAtaque(), pcCarta.getNome());
-            baralhoDeEmpate.add(jogadorCarta);
-            baralhoDeEmpate.add(pcCarta);
-            jogadorBaralho.remove(jogadorCarta);
-            pcBaralho.remove(pcCarta);
-            contadorDeEmpate = 1;
-            System.out.println("cartas adicionada ao bolo de empate");
-            for (int teste = 0; teste < baralhoDeEmpate.size(); teste++) {
-               System.out.println(baralhoDeEmpate.get(teste));
-            }
-            System.out.println("cartas adicionada ao bolo de empate foram: " + baralhoDeEmpate.size());
-         }
-      }
-
-      if (atributo.equals("magia")) {
-         if (jogadorCarta.getMagia() > pcCarta.getMagia()) {
-            System.out.println("Parabens!!!, você ganhou.");
-            System.out.printf("Sua magia  era: %d, e a do seu oponente era: %d, carta %s \n",
-                  jogadorCarta.getMagia(), pcCarta.getMagia(), pcCarta.getNome());
-            jogadorBaralho.add(pcCarta);
-            pcBaralho.remove(pcCarta);
-            jogadorBaralho.remove(jogadorCarta);
-            jogadorBaralho.add(jogadorCarta);
-
-            // if caso na ultima rodada tenha acontecido empate
-            // ESSE IF ESTA DENTRO DO PRIMEIRO IF
-            if (!baralhoDeEmpate.isEmpty()) {
-               System.out.println("cartas que voce ganhou");
-               for (int in = 0; in < baralhoDeEmpate.size(); in++) {
-                  jogadorBaralho.add(baralhoDeEmpate.get(in));
-                  // System.out.println(baralhoDeEmpate.get(in));
-               }
-               contadorDeEmpate = 0;
-               System.out.println("voce ganhou todas as cartas do empate. qunatidade de cartas obitidas :"
-                     + baralhoDeEmpate.size());
-               baralhoDeEmpate.clear();
-               System.out.println("TESTE numero de cartas no empate baralho" + baralhoDeEmpate.size());
-               System.out.println("todas minhas cartas");
-               for (int in = 0; in < jogadorBaralho.size(); in++) {
-
-                  System.out.println(jogadorBaralho.get(in));
-               }
-               System.out.println("*************************************");
-
-            }
-         } else if (jogadorCarta.getMagia() < pcCarta.getMagia()) {
-            System.out.println("Você Perdeu, sua magia é menor do que a do seu oponente.");
-            System.out.printf("Sua magia  era: %d, e a do seu oponente era: %d, carta %s \n",
-                  jogadorCarta.getMagia(), pcCarta.getMagia(), pcCarta.getNome());
-            pcBaralho.add(jogadorCarta);
-            jogadorBaralho.remove(jogadorCarta);
-            pcBaralho.remove(pcCarta);
-            pcBaralho.add(pcCarta);
-            if (!baralhoDeEmpate.isEmpty()) {
-               System.out.println("cartas que O PC Ganhou");
-               for (int in = 0; in < baralhoDeEmpate.size(); in++) {
-                  pcBaralho.add(baralhoDeEmpate.get(in));
-                  System.out.println(baralhoDeEmpate.get(in));
-               }
-               contadorDeEmpate = 0;
-               System.out.println("O PC ganhou todas as cartas do empate. qunatidade de cartas obitidas :"
-                     + baralhoDeEmpate.size());
-               baralhoDeEmpate.clear();
-               System.out.println("TESTE numero de cartas no empate baralho" + baralhoDeEmpate.size());
-               System.out.println("todas minhas cartas");
-               for (int in = 0; in < pcBaralho.size(); in++) {
-
-                  System.out.println(pcBaralho.get(in));
-               }
-               System.out.println("todas as  cartas do pc");
-
-            }
-         } else if (jogadorCarta.getMagia() == pcCarta.getMagia()) {
-            System.out.println("Você EMPATOU, sua Magia é igual ao do  seu oponente.");
-            System.out.printf("Sua maria era: %d, e o do seu oponente era: %d, carta %s \n",
-                  jogadorCarta.getAtaque(), pcCarta.getAtaque(), pcCarta.getNome());
-            baralhoDeEmpate.add(jogadorCarta);
-            baralhoDeEmpate.add(pcCarta);
-            jogadorBaralho.remove(jogadorCarta);
-            pcBaralho.remove(pcCarta);
-            contadorDeEmpate = 1;
-            System.out.println("cartas adicionada ao bolo de empate");
-            for (int teste = 0; teste < baralhoDeEmpate.size(); teste++) {
-               System.out.println(baralhoDeEmpate.get(teste));
-            }
-            System.out.println("cartas adicionada ao bolo de empate foram: " + baralhoDeEmpate.size());
-         }
-      }
+      
       
 }
 }
