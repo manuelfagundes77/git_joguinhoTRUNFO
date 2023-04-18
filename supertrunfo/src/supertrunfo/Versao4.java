@@ -34,8 +34,6 @@ public class Versao4 {
     public static void main(String[] args) {
         Scanner leitor = new Scanner(System.in);
 
-        int a = 2;
-
         // CRIANDO BARALHO QUE SERA USADO
 
         baralho baralho = new baralho();// criando o objeto baralho
