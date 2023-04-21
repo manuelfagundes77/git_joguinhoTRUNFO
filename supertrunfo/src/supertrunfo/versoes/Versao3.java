@@ -1,6 +1,7 @@
 package supertrunfo.versoes;
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import supertrunfo.classes.baralho;
@@ -37,9 +38,9 @@ public class Versao3 {
 
       // criando as arrays q vao receba as cartas do jogador e PC e BAralho de EMPATE,
       // arryas do tipo pokemon pois elas vão receber objeto pokemon
-      ArrayList<pokemon> jogadorBaralho = new ArrayList<pokemon>();
-      ArrayList<pokemon> pcBaralho = new ArrayList<pokemon>();
-      ArrayList<pokemon> barahoDeEmpate = new ArrayList<pokemon>();
+      List<pokemon> jogadorBaralho = new ArrayList<pokemon>();
+      List<pokemon> pcBaralho = new ArrayList<pokemon>();
+      List<pokemon> barahoDeEmpate = new ArrayList<pokemon>();
 
       // criado para facilitar
       int tamanhoDoBaralho = (int) (baralho2.getTamanho() / 2) + 1;
