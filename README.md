@@ -12,11 +12,16 @@ Here are some ideas to get you started:
 
 
 -->
+<div>
+ - projeto usado para aprender java usando  objeto e classes
+ -trata-se de um jogo de supertrunfo.  feito pelo promtp de comando
+
+</div>
  # Olá, me chamo Manuel
 
 - 🌱 Atualmente estou aprendendo:  java, HTML, CSS, JavaScript.
 - ⚡ Curiosidade: Formado em Direito :p
-
+- projeto usado para aprender java usando  objeto e classes
 ##contato
 
 <div>
