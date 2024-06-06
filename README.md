@@ -14,7 +14,7 @@ Here are some ideas to get you started:
 -->
 <div>
  - projeto usado para aprender java usando  objeto e classes
- -trata-se de um jogo de supertrunfo.  feito pelo promtp de comando
+<p>-trata-se de um jogo de supertrunfo.  feito pelo promtp de comando</p> 
 
 </div>
  # Olá, me chamo Manuel
